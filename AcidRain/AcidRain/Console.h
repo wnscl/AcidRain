@@ -20,7 +20,11 @@ enum {
     WHITE,
 };
 
-
+void Console_Gotoxy(int x, int y)
+{
+    COORD pos = { (SHORT)x, (SHORT)y };
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
 void Console_SetSize(int width, int height)
 {
 	char setText[100];
@@ -29,9 +33,11 @@ void Console_SetSize(int width, int height)
 }
 void Console_Clear()
 {
-	system("cls");
+	printf("\x1b[2J\x1b[H");
+	fflush(stdout);
 }
-void Console_SetColor(unsigned short text) {
+void Console_SetColor(unsigned short text) 
+{
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
 }
 
