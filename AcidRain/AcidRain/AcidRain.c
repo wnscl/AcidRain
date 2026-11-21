@@ -23,42 +23,28 @@ ULONGLONG previousTime;
 ULONGLONG currentTime;
 double deltaTime;
 
-void InitGame()
-{
-	Console_SetSize(ScreenWidth, ScreenHeigth);
-	currentState = Menu;
-	isRunning = 1;
-	maxHp = 5;
-	currentHp = 5;
-
-
-}
-void OnExitGame()
-{
-
-}
-void GameOver()
-{
-}
-void ChangeGameState(GameState newState)
-{
-	if (currentState == newState)
-		return;
-
-	currentState = newState;
-}
-void UpdateTime()
-{
-	currentTime = GetTickCount64();
-	deltaTime = (currentTime - previousTime) / MS;
-	previousTime = currentTime;
-}
+//게임의 완전한 초기화
+void InitGame();
+//게임을 종료할 때 호출되는 함수
+void OnExitGame();
+//인게임에서 게임이 종료되었을 때 호출
+void OnGameOver();
+//다음 난이도로 변경할 때 호출
+void OnNextLevel();
+//게임의 전체적인 상태 변경 함수
+void ChangeGameState(GameState newState);
+//게임의 시간을 갱신
+void UpdateTime();
+//게임의 정보값을 최신화
 void Update();
+//게임의 화면을 갱신
 void RenderScreen();
-void RenderMenu();
-void RenderInGame();
+void OnRenderMenu();
+void OnRenderInGame();
+//플레이어 조작을 갱신
 void PlayerInput();
-int EditHp(int amount);
+//플레이어의 체력을 수정
+void EditHp(int amount);
 
 int main(void)
 {
@@ -82,7 +68,37 @@ int main(void)
 		Sleep(t);
 	}
 }
+void InitGame()
+{
+	Console_SetSize(ScreenWidth, ScreenHeigth);
+	currentState = Menu;
+	isRunning = 1;
+	maxHp = 5;
+	currentHp = 5;
+}
+void OnExitGame()
+{
+	
+}
+void OnGameOver()
+{
+}
+void OnNextLevel()
+{
+}
+void ChangeGameState(GameState newState)
+{
+	if (currentState == newState)
+		return;
 
+	currentState = newState;
+}
+void UpdateTime()
+{
+	currentTime = GetTickCount64();
+	deltaTime = (currentTime - previousTime) / MS;
+	previousTime = currentTime;
+}
 void Update()
 {
 	if (currentHp == 0)
@@ -108,21 +124,21 @@ void RenderScreen()
 	switch (currentState)
 	{
 		case Menu:
-			RenderMenu();
+			OnRenderMenu();
 			break;
 		case InGame:
-			RenderInGame();
+			OnRenderInGame();
 			break;
 	}
 }
-void RenderMenu()
+void OnRenderMenu()
 {
 	char start[] = "GameStart";
 	char exit[] = "Exit";
 
 
 }
-void RenderInGame()
+void OnRenderInGame()
 {
 
 }
@@ -131,7 +147,7 @@ void PlayerInput()
 {
 
 }
-int EditHp(int amount)
+void EditHp(int amount)
 {
 	currentHp += amount;
 	if (currentHp <= 0)
