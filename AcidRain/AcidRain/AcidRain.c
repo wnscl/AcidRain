@@ -76,13 +76,17 @@ void LockTheMain(int agree)
 
 int main(void)
 {
+	srand((unsigned int)time(NULL));
+
 	DataContainer_ReadTextData();
+	DataContainer_TrySpawnText(30, 0, 0);
 }
 void InitGame()
 {
 	Console_SetSize(ScreenWidth, ScreenHeigth);
 	currentState = Menu;
 	isRunning = 1;
+	srand((unsigned int)time(NULL));
 	maxHp = 5;
 	currentHp = 5;
 }
