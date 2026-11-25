@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Console.h"
+#include "DataContainer.h"
 #define TargetFrame 60
 #define MS 1000.0
 #define ScreenWidth 90
@@ -46,8 +47,11 @@ void PlayerInput();
 //플레이어의 체력을 수정
 void EditHp(int amount);
 
-int main(void)
+void LockTheMain(int agree)
 {
+	if (agree == 1)
+		return;
+
 	InitGame();
 
 	previousTime = GetTickCount64();
@@ -67,6 +71,12 @@ int main(void)
 		RenderScreen();
 		Sleep(t);
 	}
+
+}
+
+int main(void)
+{
+	DataContainer_ReadTextData();
 }
 void InitGame()
 {
@@ -103,7 +113,7 @@ void Update()
 {
 	if (currentHp == 0)
 	{
-		GameOver();
+		OnGameOver();
 		ChangeGameState(Menu);
 	}
 	switch (currentState)

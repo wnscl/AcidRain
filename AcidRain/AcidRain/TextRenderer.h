@@ -2,13 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct
-{
-	const char *text;
-	int xpos;
-	int ypos;
-	TextNode *next;
-}TextNode;
+
 //ingame에 등장하는 즉 떨어지는 단어를 구조체화
 //이 때 인게임 상에 등장하는 단어가 100개를 넘어가지 않을 것임으로 연결리스트를 통해
 //편리하게 삽입, 제거 할 수 있도록 함

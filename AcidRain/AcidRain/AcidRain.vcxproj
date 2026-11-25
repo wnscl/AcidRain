@@ -127,6 +127,7 @@
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
     </ClCompile>
     <ClCompile Include="Console.h" />
+    <ClCompile Include="DataContainer.h" />
     <ClCompile Include="Test.c" />
   </ItemGroup>
   <ItemGroup>
