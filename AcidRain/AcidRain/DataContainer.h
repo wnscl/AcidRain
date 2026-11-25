@@ -20,6 +20,16 @@ int textDataIndex[MAX_LEN] = { 0 };
 //특정 길이의 단어데이터가 몇개인지
 TextNode* head;
 
+float spawnIntervalTime = 0;
+//생성 후 다음 생성까지 대기 시간
+int spawnTextAmount = 0;
+//1회 생성 당 생성되는 단어 개수
+int spawnMinLength = 0;
+int spawnMaxLength = 0;
+//단어 생성 시 최소 길이 ~ 최대 길이
+float fallDuration;
+//추락시간 0.5 라면 0.5초마다 모든 text의 y 좌표값이 + 1 (+여야 밑으로 감)
+
 int DataContainer_ReadTextData()
 {
 	FILE* f = NULL;
@@ -56,7 +66,10 @@ int DataContainer_ReadTextData()
 	fclose(f); // 파일 닫기 추가
 	return 1;
 }
+int DataContainer_ReadDiffData()
+{
 
+}
 int DataContainer_TrySpawnText(int textLength, int x, int y)
 {
 	//주어진 텍스트 길이값의 배열 크기값(textdataIndex)으로 난수값 생성
