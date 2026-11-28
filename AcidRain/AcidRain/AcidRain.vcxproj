@@ -128,7 +128,6 @@
     </ClCompile>
     <ClCompile Include="Console.h" />
     <ClCompile Include="DataContainer.h" />
-    <ClCompile Include="Test.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextRenderer.h" />

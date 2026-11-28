@@ -18,19 +18,16 @@
     <ClCompile Include="AcidRain.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Console.h">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Test.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="DataContainer.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.h">
+      <Filter>헤더 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextRenderer.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

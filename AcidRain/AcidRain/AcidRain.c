@@ -1,8 +1,8 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Console.h"
 #include "DataContainer.h"
+#include "TextRenderer.h"
 #define TargetFrame 60
 #define MS 1000.0
 #define ScreenWidth 90
@@ -47,48 +47,50 @@ void PlayerInput();
 //플레이어의 체력을 수정
 void EditHp(int amount);
 
-void LockTheMain(int agree)
+int main(void)
 {
-	if (agree == 1)
-		return;
-
 	InitGame();
+	DataContainer_TrySpawnText(6,45,0);
+	DataContainer_TrySpawnText(10, 65, 5);
+	DataContainer_TrySpawnText(8, 15, 2);
 
-	previousTime = GetTickCount64();
-	float targetFrameSeconds = 1 / (float)TargetFrame;
-	float t = targetFrameSeconds * 1000;
-
-	while (isRunning)
+	int testC = 0;
+	while (testC < 50)
 	{
-		UpdateTime();
-		PlayerInput();
-		if (isRunning == 0)
-		{
-			OnExitGame();
-			break;
-		}
-		Update();
-		RenderScreen();
-		Sleep(t);
+		DataContainer_MoveAllTextDown();
+		TextRenderer_DrawGameScene(head);
+		testC++;
+		Sleep(300);
 	}
 
 }
-
-int main(void)
-{
-	srand((unsigned int)time(NULL));
-
-	DataContainer_ReadTextData();
-	DataContainer_TrySpawnText(30, 0, 0);
-}
 void InitGame()
 {
-	Console_SetSize(ScreenWidth, ScreenHeigth);
+	int errorDetect = 1;
+
 	currentState = Menu;
 	isRunning = 1;
 	srand((unsigned int)time(NULL));
 	maxHp = 5;
 	currentHp = 5;
+
+	errorDetect = DataContainer_ReadTextData();
+	if (errorDetect == 0)
+	{
+		printf("초기 로드 오류 _ 단어장 데이터 초기화 실패");
+		return;
+	}
+	errorDetect = DataContainer_ReadDiffData();
+	if (errorDetect == 0)
+	{
+		printf("초기 로드 오류 _ 난이도 데이터 초기화 실패");
+		return;
+	}
+
+	if (errorDetect == 1)
+		printf("게임 초기화 성공\0");
+
+	TextRenderer_DrawMainScene();
 }
 void OnExitGame()
 {
